@@ -1,6 +1,6 @@
 export type Comment = {
     id: string
-    body: any
+    body: string
     email: string
 }
 
@@ -9,5 +9,5 @@ export type Post = {
     title: string
     string: string
     id: string
-    body: any
+    body: string
 }
