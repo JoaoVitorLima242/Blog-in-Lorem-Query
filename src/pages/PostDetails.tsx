@@ -1,4 +1,4 @@
-import { Comment, Post } from "./@types/posts";
+import { Comment, Post } from "../@types/posts";
 
 async function fetchComments(postId: string) {
     const response = await fetch(

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 
 import { PostDetail } from "./PostDetails";
-import { Post } from "./@types/posts";
+import { Post } from "../@types/posts";
 const maxPostPage = 10;
 
 async function fetchPosts() {
@@ -17,9 +17,9 @@ export function Posts() {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
   // replace with useQuery
-  const { data, isError, error, isLoading } = useQuery<Post[], Error>("posts", fetchPosts);
+  const { data, isError, error, isLoading, isIdle } = useQuery<Post[], Error>("posts", fetchPosts);
 
-  if (isLoading) return <h3>Loading...</h3>;
+  if (isLoading || isIdle) return <h3>Loading...</h3>;
   if (isError)
     return (
       <>
@@ -31,7 +31,7 @@ export function Posts() {
   return (
     <>
       <ul>
-        {data && data.map((post) => (
+        {data.map((post) => (
           <li
             key={post.id}
             className="post-title"
