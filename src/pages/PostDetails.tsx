@@ -1,3 +1,4 @@
+import { useQuery } from "react-query";
 import { Comment, Post } from "../@types/posts";
 
 async function fetchComments(postId: string) {
@@ -28,8 +29,17 @@ async function fetchComments(postId: string) {
     post: Post
   }) {
     // replace with useQuery
-    const data: Comment[] = [];
+    const {data, error, isLoading, isIdle, isError} = useQuery<Comment[], Error>(['comments', post.id], () => fetchComments(post.id))
   
+    if (isLoading || isIdle) return <h3>Loading...</h3>;
+    if (isError)
+      return (
+        <>
+          <h3>Oops, something went wrong</h3>
+          <p>{error.toString()}</p>
+        </>
+      );
+
     return (
       <>
         <h3 style={{ color: "blue" }}>{post.title}</h3>
