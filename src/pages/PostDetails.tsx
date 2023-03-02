@@ -28,7 +28,7 @@ async function fetchComments(postId: string) {
   export function PostDetail({ post }: {
     post: Post
   }) {
-    // replace with useQuery
+
     const {data, error, isLoading, isIdle, isError} = useQuery<Comment[], Error>(['comments', post.id], () => fetchComments(post.id))
 
     const deleteMutation = useMutation((postId: string) => deletePost(postId))
